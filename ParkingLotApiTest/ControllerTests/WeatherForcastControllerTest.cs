@@ -7,21 +7,21 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ParkingLotApiTest;
 
 namespace ParkingLotApiTest.ControllerTests
 {
-    public class WeatherForcastControllerTest
+    public class WeatherForcastControllerTest : TestBase
     {
-        private HttpClient _httpClient;
-        public WeatherForcastControllerTest() 
+
+        public WeatherForcastControllerTest(WebApplicationFactory<Program> factory) : base(factory)
         {
-            WebApplicationFactory<Program> webApplicationFactory = new WebApplicationFactory<Program>();
-            _httpClient = webApplicationFactory.CreateClient();
         }
         [Fact]
         public async Task Should_return_correctly_When_weatherForcast()
         {
             //given & when
+            HttpClient _httpClient = GetClient();
             HttpResponseMessage response = await _httpClient.GetAsync("/WeatherForecast");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
