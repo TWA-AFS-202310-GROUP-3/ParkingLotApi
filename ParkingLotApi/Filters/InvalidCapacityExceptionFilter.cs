@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ParkingLotApi.Exceptions;
+using System.Net;
 
 namespace ParkingLotApi.Filters
 {
@@ -13,6 +14,11 @@ namespace ParkingLotApi.Filters
             if (context.Exception is InvalidCapacityException invalidCapacityException)
             {
                 context.Result = new BadRequestResult();
+                context.ExceptionHandled = true;
+            }
+            if (context.Exception is FormatException)
+            {
+                context.Result = new NotFoundResult();
                 context.ExceptionHandled = true;
             }
         }

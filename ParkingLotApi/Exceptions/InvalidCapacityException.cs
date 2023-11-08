@@ -3,7 +3,7 @@
 namespace ParkingLotApi.Exceptions
 {
     [Serializable]
-    internal class InvalidCapacityException : Exception
+    public class InvalidCapacityException : Exception
     {
         public InvalidCapacityException()
         {

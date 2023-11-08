@@ -38,5 +38,11 @@ namespace ParkingLotApi.Services
             
             return parkingLotEntities.Skip(skipItems).Take(15).Select(entity => DataConverter.ConvertToParkingLotDto(entity)).ToList();
         }
+
+        public async Task<ParkingLotDto> GetParkLot(string id)
+        {
+            ParkingLotDto parkingLotDto = DataConverter.ConvertToParkingLotDto(await parkingLotRepository.GetParkingLot(id));
+            return parkingLotDto;
+        }
     }
 }

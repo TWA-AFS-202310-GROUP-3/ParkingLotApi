@@ -17,7 +17,7 @@ namespace ParkingLotApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ParkingLotEntity>> CreateParkingLost([FromBody] ParkingLotRequestDto parkingLotRequestDto)
+        public async Task<ActionResult<ParkingLotDto>> CreateParkingLost([FromBody] ParkingLotRequestDto parkingLotRequestDto)
         {
             return StatusCode(StatusCodes.Status201Created, await parkingService.AddParkingLot(parkingLotRequestDto));
         }
@@ -37,6 +37,12 @@ namespace ParkingLotApi.Controllers
                 return BadRequest();
             }
             return StatusCode(StatusCodes.Status200OK, await parkingService.GetParkLots(pageIndex));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ParkingLotDto>> GetParkingLost(string id)
+        {
+            return StatusCode(StatusCodes.Status200OK, await parkingService.GetParkLot(id));
         }
     }
 }

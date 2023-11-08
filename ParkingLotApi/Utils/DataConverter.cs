@@ -7,6 +7,11 @@ namespace ParkingLotApi.Utils
     {
         public static ParkingLotEntity ConvertRequestToParkingLotEntity(ParkingLotRequestDto parkingLotRequestDto)
         {
+            if (parkingLotRequestDto == null)
+            {
+                return null;
+            }
+
             return new ParkingLotEntity()
             {
                 Name = parkingLotRequestDto.Name,
@@ -17,6 +22,11 @@ namespace ParkingLotApi.Utils
 
         public static ParkingLotEntity ConvertToParkingLotEntity(ParkingLotDto parkingLotDto)
         {
+            if (parkingLotDto == null)
+            {
+                return null;
+            }
+
             return new ParkingLotEntity()
             {
                 Id = parkingLotDto.Id,
@@ -28,6 +38,11 @@ namespace ParkingLotApi.Utils
 
         public static ParkingLotDto ConvertToParkingLotDto(ParkingLotEntity parkingLotEntity)
         {
+            if (parkingLotEntity == null)
+            {
+                return null;
+            }
+
             return new ParkingLotDto()
             {
                 Id = parkingLotEntity.Id,

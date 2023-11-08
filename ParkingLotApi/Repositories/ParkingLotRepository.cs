@@ -27,9 +27,9 @@ namespace ParkingLotApi.Repositories
             await parkingLotCollection.FindOneAndDeleteAsync(a => a.Id == id);
         }
 
-        public Task<ParkingLotEntity> GetParkingLot(string id)
+        public async Task<ParkingLotEntity> GetParkingLot(string id)
         {
-            throw new NotImplementedException();
+            return await parkingLotCollection.Find(a => a.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<ParkingLotEntity>> GetParkingLots()
