@@ -18,14 +18,14 @@ namespace ParkingLotApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ParkingLotDto>> CreateParkingLotAysnc([FromBody] ParkingLotDto parkingLotDto)
         {
-            //try
-            //{
             return StatusCode(StatusCodes.Status201Created, await _parkingLotsService.CreateAsync(parkingLotDto));
-            //}
-            //catch (InvalidCapacityException exception)
-            //{
-            //    return BadRequest();
-            //}
+        }
+
+        [HttpDelete("{name}")]
+        public async Task<ActionResult> Delete(string name)
+        {
+            await _parkingLotsService.DeleteAsync(name);
+            return NoContent();
         }
     }
 }

@@ -5,7 +5,7 @@ using ParkingLotApi.Repositories;
 
 namespace ParkingLotApi.Services
 {
-    public class ParkingLotsService
+    public class ParkingLotsService : IParkingLotsService
     {
         private readonly IParkingLotsRepository parkingLotsRepository;
         public ParkingLotsService(IParkingLotsRepository parkingLotsRepository)
@@ -20,6 +20,11 @@ namespace ParkingLotApi.Services
                 throw new InvalidCapacityException();
             }
             return await parkingLotsRepository.CreateParkingLot(parkingLotDto.ToEntity());
+        }
+
+        public async Task DeleteAsync(string parkingLotName)
+        {
+            await parkingLotsRepository.DeleteParkingLot(parkingLotName);
         }
     }
 }
