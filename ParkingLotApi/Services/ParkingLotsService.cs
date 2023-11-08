@@ -1,6 +1,7 @@
 ﻿using ParkingLotApi.Exceptions;
 using ParkingLotApi.Models;
 using ParkingLotApi.Repositories;
+using System;
 
 namespace ParkingLotApi.Services
 {
@@ -22,6 +23,14 @@ namespace ParkingLotApi.Services
         public async Task<bool> RemoveAsync(string id)
         {
             return await _parkingLotsRepository.DeleteParkingLotAsync(id);
+        }
+
+        public async Task<List<ParkingLotEntity>> GetOnePageParkingLots(int pageIndex)
+        {
+            var allParkingLots =  await _parkingLotsRepository.GetAllAsync();
+            int pageSize = 15;
+            int startIdx = (int)((pageIndex - 1) * pageSize);
+            return allParkingLots.Skip(startIdx).Take((int)pageSize).ToList();
         }
     }
 }

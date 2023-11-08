@@ -30,8 +30,7 @@ namespace ParkingLotApi.Repositories
 
         public async Task<List<ParkingLotEntity>> GetAllAsync()
         {
-            var parkingLots = await _parkingLotsCollection.Find(_ => true).ToListAsync();
-            return parkingLots;
+            return await _parkingLotsCollection.Find(_ => true).ToListAsync();
         }
     }
 }

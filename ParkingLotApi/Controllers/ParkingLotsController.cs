@@ -6,7 +6,7 @@ using ParkingLotApi.Services;
 namespace ParkingLotApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ParkingLotsController : ControllerBase
     {
         private readonly ParkingLotsService _parkingLotsService;
@@ -16,7 +16,7 @@ namespace ParkingLotApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ParkingLotDto>> AddParkingLot([FromBody] ParkingLotDto parkingLotDto)
+        public async Task<ActionResult<ParkingLotEntity>> AddParkingLot([FromBody] ParkingLotDto parkingLotDto)
         {
            /* try
             {*/
@@ -37,6 +37,12 @@ namespace ParkingLotApi.Controllers
                 return NoContent();
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ParkingLotEntity>>> GetOnePageParkingLots([FromQuery] int pageIndex)
+        {
+            return await _parkingLotsService.GetOnePageParkingLots(pageIndex);
         }
     }
 }
