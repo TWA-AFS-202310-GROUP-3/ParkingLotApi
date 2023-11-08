@@ -35,6 +35,18 @@ namespace ParkingLotApi.Services
         public async Task<List<ParkingLot>> GetAsync() =>
             await parkingLotsRepository.GetAll();
 
+        public async Task<List<ParkingLot>> GetInPageAsync(int pageIndex)
+        {
+            List<ParkingLot> parkingLots = await GetAsync();
+            int pageSize = 15;
+            int pagesToBeSkip = pageSize * (pageIndex - 1);
+            if ( pagesToBeSkip >= parkingLots.Count || pagesToBeSkip < 1 )
+            {
+                throw new InvalidPageIndexException();
+            }
+            return parkingLots.Skip(pagesToBeSkip).Take(pageSize).ToList();
+        }
+
         public async Task<ParkingLot> GetByIdAsync(string id) =>
             await parkingLotsRepository.GetParkingLotById(id);
 

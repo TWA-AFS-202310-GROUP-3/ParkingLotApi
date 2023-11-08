@@ -31,12 +31,9 @@ namespace ParkingLotApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ParkingLot>>> GetAll([FromQuery]int pageIndex)
+        public async Task<ActionResult<List<ParkingLot>>> GetInPage([FromQuery]int pageIndex)
         {
-            List<ParkingLot> parkingLots = await _parkingLotsService.GetAsync();
-            int pageSize = 15;
-            int countToBeSkip = pageSize * (pageIndex - 1);
-            return Ok(parkingLots.Skip(countToBeSkip).Take(pageSize).ToList());
+            return Ok(await _parkingLotsService.GetInPageAsync(pageIndex));
         }
 
         [HttpGet("{id}")]
