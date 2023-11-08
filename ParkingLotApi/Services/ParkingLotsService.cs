@@ -47,8 +47,8 @@ namespace ParkingLotApi.Services
 
         public async Task<ParkingLotDto> UpdateParkLot(string id, ParkingLotDto parkingLotDto)
         {
-            ParkingLotEntity parkingLotEntity = await parkingLotRepository.UpdateParkingLot(id, DataConverter.ConvertToParkingLotEntity(parkingLotDto));
-            return DataConverter.ConvertToParkingLotDto(parkingLotEntity);
+            await parkingLotRepository.UpdateParkingLot(id, DataConverter.ConvertToParkingLotEntity(parkingLotDto));
+            return await GetParkLot(id);
         }
     }
 }
