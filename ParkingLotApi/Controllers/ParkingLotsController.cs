@@ -27,5 +27,15 @@ namespace ParkingLotApi.Controllers
             await _parkingLotsService.DeleteAsync(name);
             return NoContent();
         }
+
+        [HttpGet]
+        public async Task<ActionResult<ParkingLotDto>> Get(int? pageSize, int? pageIndex)
+        {
+            if (pageSize != null && pageIndex != null)
+            {
+                return Ok(await _parkingLotsService.GetPage((int)pageSize, pageIndex));
+            }
+            return Ok(await _parkingLotsService.GetAll());
+        }
     }
 }
