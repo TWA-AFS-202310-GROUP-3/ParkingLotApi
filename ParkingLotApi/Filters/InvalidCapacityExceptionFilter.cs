@@ -7,9 +7,9 @@ namespace ParkingLotApi.Filters
 {
     public class InvalidCapacityExceptionFilter : IActionFilter, IOrderedFilter
     {
-        int IOrderedFilter.Order => int.MaxValue - 10;
+        public int Order => 0;
 
-        void IActionFilter.OnActionExecuted(ActionExecutedContext context)
+        public void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.Exception is InvalidCapacityException)
             {
@@ -18,10 +18,9 @@ namespace ParkingLotApi.Filters
             }
         }
 
-        void IActionFilter.OnActionExecuting(ActionExecutingContext context)
+        public void OnActionExecuting(ActionExecutingContext context)
         {
 
         }
-
     }
 }
