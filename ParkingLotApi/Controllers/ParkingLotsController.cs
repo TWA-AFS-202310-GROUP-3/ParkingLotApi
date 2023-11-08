@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ParkingLotApi.Models;
+using ParkingLotApi.Services;
 
 namespace ParkingLotApi.Controllers
 {
@@ -7,6 +8,12 @@ namespace ParkingLotApi.Controllers
     [Route("[controller]")]
     public class ParkingLotsController : ControllerBase
     {
+        private readonly ParkingLotsService _parkingLotsService;
+        public ParkingLotsController(ParkingLotsService parkingLotsService)
+        {
+            _parkingLotsService = parkingLotsService;
+        }
+
         [HttpPost]
         public async Task<ActionResult<ParkingLotDto>> AddParkingLot([FromBody] ParkingLotDto parkingLotDto)
         {
