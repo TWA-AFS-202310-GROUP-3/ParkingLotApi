@@ -1,0 +1,28 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@hostname=localhost
+@port=5128
+
+# Pet APIS
+## POST /api/parkingLots
+## GET /api/parkingLots
+## GET /api/parkingLots/{name}
+## PUT /api/parkingLots/{name}
+## DELETE /api/parkingLots/{name}
+
+## 1. Create ParkingLot
+POST http://{{hostname}}:{{port}}/api/parkingLots
+Content-Type: application/json; charset=utf-8
+
+{
+    "Name": "SLB parkingLOt",
+    "Capacity": 20,
+    "location": "Chuangxin building"
+
+}
+
+## Response 
+### 1.Created, Return the parkingLot created with Status Created ( 201 )
+### 2.Already Existed, Return Status Bad Request ( 400 )
+### 3.Capacity Invalid, Return Status Bad Request ( 400 )
+
