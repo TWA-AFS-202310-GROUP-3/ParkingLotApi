@@ -1,0 +1,32 @@
+
+@hostname=localhost
+@port=5128
+
+# Companies APIS
+## POST /api/parkinglots
+
+
+## 1. Create parkinglots
+URL: http://{{hostname}}:{{port}}/api/parkinglots
+Method: POST
+Content-Type: application/json; charset=utf-8
+
+## Request Body
+{
+    "name": "Chuangxin parkinglot",
+	"capacity": 10,
+	"location": "tshinghua tech park"
+}
+
+## Response 
+### 1.Created, Return the parkinglots created with Status Created ( 201 )
+### 2.Already Existed, Return Status Bad Request ( 400 )
+### 3.Server crash, return status bad request (500)
+
+## Response Body
+{
+	"id": "8927h244j432k5n2",
+    "name": "Chuangxin par",
+	"capacity": 10,
+	"location": "tshinghua tech park"
+}

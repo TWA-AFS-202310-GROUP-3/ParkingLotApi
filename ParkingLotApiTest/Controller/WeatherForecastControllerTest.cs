@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ParkingLotApiTest
+namespace ParkingLotApiTest.Controller
 {
     public class WeatherForecastControllerTest : TestBase
     {
@@ -20,7 +20,6 @@ namespace ParkingLotApiTest
         public async Task Should_return_correctly_when_get_weather_forecast()
         {
             //given & when
-
             HttpClient httpClient = GetClient();
             HttpResponseMessage response = await httpClient.GetAsync("/WeatherForecast");
 
