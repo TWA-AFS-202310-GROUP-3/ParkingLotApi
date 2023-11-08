@@ -8,21 +8,18 @@ using System.Threading.Tasks;
 
 namespace ParkingLotApiTest
 {
-    public class WeatherForecastControllerTest
+    public class WeatherForecastControllerTest : TestBase
     {
-        private HttpClient _httpClient;
-
-        public WeatherForecastControllerTest()
+        public WeatherForecastControllerTest(WebApplicationFactory<Program> factory) : base(factory)
         {
-            WebApplicationFactory<Program> webApplicationFactory = new WebApplicationFactory<Program>();
-            _httpClient = webApplicationFactory.CreateClient();
         }
 
         [Fact]
         public async Task Should_return_correctly_when_get_weather_forecast()
         {
             //Given & When
-            HttpResponseMessage httpResponseMessage = await _httpClient.GetAsync("/WeatherForecast");
+            HttpClient httpClient = GetClient();
+            HttpResponseMessage httpResponseMessage = await httpClient.GetAsync("/WeatherForecast");
             //Then
             Assert.Equal(HttpStatusCode.OK, httpResponseMessage.StatusCode);
         }
