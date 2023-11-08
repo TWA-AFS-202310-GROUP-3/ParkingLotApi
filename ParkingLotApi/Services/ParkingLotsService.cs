@@ -32,5 +32,10 @@ namespace ParkingLotApi.Services
             int startIdx = (int)((pageIndex - 1) * pageSize);
             return allParkingLots.Skip(startIdx).Take((int)pageSize).ToList();
         }
+
+        public async Task<ParkingLotEntity> GetByIdAsync(string id)
+        {
+            return await _parkingLotsRepository.GetByIdAsync(id);
+        }
     }
 }
