@@ -38,7 +38,7 @@ namespace ParkingLotApi.Services
         public async Task<List<ParkingLot>> GetInPageAsync(int pageIndex)
         {
             List<ParkingLot> parkingLots = await GetAsync();
-            int pageSize = 6;
+            int pageSize = 15;
             int pagesToBeSkip = pageSize * (pageIndex - 1);
             if ( pagesToBeSkip >= parkingLots.Count || pageIndex < 1 )
             {
@@ -50,14 +50,14 @@ namespace ParkingLotApi.Services
         public async Task<ParkingLot> GetByIdAsync(string id) =>
             await parkingLotsRepository.GetParkingLotById(id);
 
-        public async Task<ParkingLot> UpdateParkingLotAsync(string id, CapacityDto capacity)
+        public async Task<ParkingLot> UpdateParkingLotAsync(string id, CapacityDto capacityDto)
         {
             ParkingLot parkingLot = await GetByIdAsync(id);
-            if (capacity.Capacity < 10 || capacity.Capacity < parkingLot.Capacity)
+            if (capacityDto.Capacity < 10 || capacityDto.Capacity < parkingLot.Capacity)
             {
                 throw new InvalidCapacityException();
             }
-
+            parkingLot.Capacity = capacityDto.Capacity;
             return await parkingLotsRepository.UpdateParkingLot(id, parkingLot);
         }
         
