@@ -59,7 +59,7 @@ namespace ParkingLotApi.Controllers
                 return NotFound();
             }
             parkingLot.Capacity = capacity.Capacity;
-            return await _parkingLotsService.UpdateParkingLotAsync(id, parkingLot);
+            return Ok(await _parkingLotsService.UpdateParkingLotAsync(id, parkingLot));
         }
     }
 }
