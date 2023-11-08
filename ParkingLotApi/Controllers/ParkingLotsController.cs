@@ -41,7 +41,7 @@ namespace ParkingLotApi.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ParkingLotDto>> GetById(string id)
         {
-            var parkingLot = await ParkingLotsService.GetById(id);
+            var parkingLot = await _parkingLotsService.GetById(id);
             if (parkingLot == null)
             {
                 return NotFound();
