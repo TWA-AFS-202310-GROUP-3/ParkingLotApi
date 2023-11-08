@@ -51,5 +51,17 @@ namespace ParkingLotApi.Services
                 return await parkingLotsRepository.GetParkingLotByPageInfo(pageIndex, pageSize);
             }
         }
+
+        public async Task<ParkingLot> GetParkingLotById(string id)
+        {
+            ParkingLot parkingLot = await parkingLotsRepository.GetParkingLotById(id);
+
+            if (parkingLot == null)
+            {
+                throw new ParkingLotNotFoundException();
+            }
+
+            return parkingLot;
+        }
     }
 }

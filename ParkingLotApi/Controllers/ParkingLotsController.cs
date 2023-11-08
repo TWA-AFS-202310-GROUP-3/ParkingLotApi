@@ -42,5 +42,11 @@ namespace ParkingLotApi.Controllers
         {
             return await parkingLotService.GetParkingLotByPageInfo(pageIndex);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ParkingLot>> GetParkingLotByIdAsync(string id)
+        {
+            return await parkingLotService.GetParkingLotById(id);
+        }
     }
 }
