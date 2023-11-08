@@ -37,5 +37,13 @@ namespace ParkingLotApi.Repositories
         {
             return await _parkingLotsCollection.Find(p => p.Id == id).FirstOrDefaultAsync();
         } 
+
+        public async Task<ParkingLotEntity?> UpdateCapacity(string id, ParkingLotEntity updatedParkingLot)
+        {
+            await _parkingLotsCollection.ReplaceOneAsync(p => p.Id == id, updatedParkingLot);
+            return await GetByIdAsync(id);
+        }
+
+
     }
 }

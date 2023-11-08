@@ -37,5 +37,27 @@ namespace ParkingLotApi.Services
         {
             return await _parkingLotsRepository.GetByIdAsync(id);
         }
+
+        public IParkingLotsRepository Get_parkingLotsRepository()
+        {
+            return _parkingLotsRepository;
+        }
+
+        public async Task<ParkingLotEntity?> UpdateCapacity(string id, int capacity)
+        {
+            var parkingLot = await _parkingLotsRepository.GetByIdAsync(id);
+            if (parkingLot != null)
+            {
+                var updatedParkingLot = new ParkingLotEntity()
+                {
+                    Capacity = capacity,
+                    Id = parkingLot.Id,
+                    Name = parkingLot.Name,
+                    Location = parkingLot.Location
+                };
+                return await _parkingLotsRepository.UpdateCapacity(id, updatedParkingLot);
+            }
+            return null;
+        }
     }
 }

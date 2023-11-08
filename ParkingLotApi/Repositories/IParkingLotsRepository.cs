@@ -8,5 +8,6 @@ namespace ParkingLotApi.Repositories
         Task<bool> DeleteParkingLotAsync(string id);
         Task<List<ParkingLotEntity>> GetAllAsync();
         Task<ParkingLotEntity> GetByIdAsync(string id);
+        Task<ParkingLotEntity> UpdateCapacity(string id, ParkingLotEntity updatedParkingLot);
     }
 }

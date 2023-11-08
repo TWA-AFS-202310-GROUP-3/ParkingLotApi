@@ -55,5 +55,16 @@ namespace ParkingLotApi.Controllers
             }
             return Ok(parkingLot);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ParkingLotEntity>> UpdateCapacityAsync(string id, [FromBody] int capacity)
+        {
+            var updatedParkingLot = await _parkingLotsService.UpdateCapacity(id, capacity);
+            if (updatedParkingLot == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedParkingLot);
+        }
     }
 }
