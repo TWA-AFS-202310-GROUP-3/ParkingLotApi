@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.Testing;
 using ParkingLotApi.Dtos;
 using ParkingLotApi.Models;
 using System.Net;
@@ -96,6 +97,19 @@ namespace ParkingLotApiTest.Controllers
 
             //Then
             Assert.Equal(HttpStatusCode.OK, responseMessage.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_return_bad_request_with_given_invalid_pageIndex()
+        {
+            //Given
+            await CreateNNewParkingLot(30);
+
+            //Then
+            HttpResponseMessage responseMessage = await _httpClient.GetAsync($"{url}?pageIndex=-1");
+
+            //Then
+            Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
         }
 
         private async Task<string> CreateNewParkingLot()
