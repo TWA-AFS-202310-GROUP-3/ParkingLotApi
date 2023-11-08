@@ -135,6 +135,44 @@ namespace ParkingLotApiTest.Controllers
             Assert.Equal(HttpStatusCode.NotFound, responseMessage.StatusCode);
         }
 
+        [Fact]
+        public async Task Should_return_updated_parkingLot_with_status_200_given_valid_id()
+        {
+            //Given
+            string existId = await CreateNewParkingLot();
+            ParkingLotDto parkingLotDto = new ParkingLotDto()
+            {
+                Id = existId,
+                Name = "a new name",
+                Capacity = 20,
+                Location = "LiBai"
+            };
+
+            //Then
+            HttpResponseMessage responseMessage = await _httpClient.PutAsJsonAsync($"{url}/{existId}", parkingLotDto);
+
+            //Then
+            Assert.Equal(HttpStatusCode.OK, responseMessage.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_return_404_when_update_parkingLot_given_invalid_id()
+        {
+            //Given
+            ParkingLotDto parkingLotDto = new ParkingLotDto()
+            {
+                Id = "wrongId",
+                Name = "a new name",
+                Capacity = 20,
+                Location = "LiBai"
+            };
+            //Then
+            HttpResponseMessage responseMessage = await _httpClient.PutAsJsonAsync($"{url}/wrongId", parkingLotDto);
+
+            //Then
+            Assert.Equal(HttpStatusCode.NotFound, responseMessage.StatusCode);
+        }
+
         private async Task<string> CreateNewParkingLot()
         {
             ParkingLotRequestDto parkingLotRequestDto = new ParkingLotRequestDto()

@@ -8,6 +8,6 @@ namespace ParkingLotApi.Repositories
         public Task DeleteParkingLot(string id);
         public Task<List<ParkingLotEntity>> GetParkingLots();
         public Task<ParkingLotEntity> GetParkingLot(string id);
-        public Task<ParkingLotEntity> UpdateParkingLot(ParkingLotEntity parkingLotEntity);
+        public Task<ParkingLotEntity> UpdateParkingLot(string id, ParkingLotEntity parkingLotEntity);
     }
 }

@@ -37,9 +37,9 @@ namespace ParkingLotApi.Repositories
             return await parkingLotCollection.Find(_ => true).ToListAsync();
         }
 
-        public Task<ParkingLotEntity> UpdateParkingLot(ParkingLotEntity parkingLotEntity)
+        public async Task<ParkingLotEntity> UpdateParkingLot(string id, ParkingLotEntity parkingLotEntity)
         {
-            throw new NotImplementedException();
+            return await parkingLotCollection.FindOneAndReplaceAsync(a => a.Id == id, parkingLotEntity);
         }
     }
 }
