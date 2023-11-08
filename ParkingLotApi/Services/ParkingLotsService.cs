@@ -30,5 +30,13 @@ namespace ParkingLotApi.Services
         {
             await parkingLotRepository.DeleteParkingLot(id);
         }
+
+        public async Task<List<ParkingLotDto>?> GetParkLots(int pageIndex)
+        {
+            int skipItems = (pageIndex - 1) * 15;
+            List<ParkingLotEntity> parkingLotEntities = await parkingLotRepository.GetParkingLots();
+            
+            return parkingLotEntities.Skip(skipItems).Take(15).Select(entity => DataConverter.ConvertToParkingLotDto(entity)).ToList();
+        }
     }
 }

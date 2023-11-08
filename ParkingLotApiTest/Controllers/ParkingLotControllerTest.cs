@@ -73,7 +73,7 @@ namespace ParkingLotApiTest.Controllers
         }
 
         [Fact]
-        public async Task Should_delete_parking_with_status_204()
+        public async Task Should_delete_parkingLot_with_status_204()
         {
             //Given
             string existId = await CreateNewParkingLot();
@@ -83,6 +83,19 @@ namespace ParkingLotApiTest.Controllers
 
             //Then
             Assert.Equal(HttpStatusCode.NoContent, responseMessage.StatusCode);
+        }
+
+        [Fact]
+        public async Task Should_get_parkingLots_with_status_200_given_pageIndex()
+        {
+            //Given
+            await CreateNNewParkingLot(30);
+
+            //Then
+            HttpResponseMessage responseMessage = await _httpClient.GetAsync($"{url}?pageIndex=1");
+
+            //Then
+            Assert.Equal(HttpStatusCode.OK, responseMessage.StatusCode);
         }
 
         private async Task<string> CreateNewParkingLot()
@@ -96,6 +109,20 @@ namespace ParkingLotApiTest.Controllers
             HttpResponseMessage responseMessage = await _httpClient.PostAsJsonAsync(url, parkingLotRequestDto);
             ParkingLotDto? parkingLotDto = await responseMessage.Content.ReadFromJsonAsync<ParkingLotDto>();
             return parkingLotDto?.Id;
+        }
+
+        private async Task CreateNNewParkingLot(int num)
+        {
+            for (int i = 0; i < num; i++)
+            {
+                var parkingLotRequestDto = new ParkingLotRequestDto()
+                {
+                    Name = $"parking lot {num}",
+                    Capacity = 10,
+                    Location = "TS buildingA"
+                };
+                await _httpClient.PostAsJsonAsync(url, parkingLotRequestDto);
+            }
         }
     }
 }

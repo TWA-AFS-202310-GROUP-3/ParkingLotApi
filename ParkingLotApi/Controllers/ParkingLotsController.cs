@@ -28,5 +28,15 @@ namespace ParkingLotApi.Controllers
             await parkingService.DeleteParkingLot(id);
             return StatusCode(StatusCodes.Status204NoContent);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetParkingLosts(int pageIndex = 0)
+        {
+            if (pageIndex < 0)
+            {
+                return BadRequest();
+            }
+            return StatusCode(StatusCodes.Status200OK, await parkingService.GetParkLots(pageIndex));
+        }
     }
 }

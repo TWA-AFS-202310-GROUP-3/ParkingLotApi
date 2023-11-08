@@ -32,9 +32,9 @@ namespace ParkingLotApi.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<ParkingLotEntity>> GetParkingLots()
+        public async Task<List<ParkingLotEntity>> GetParkingLots()
         {
-            throw new NotImplementedException();
+            return await parkingLotCollection.Find(_ => true).ToListAsync();
         }
 
         public Task<ParkingLotEntity> UpdateParkingLot(ParkingLotEntity parkingLotEntity)
