@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 using ParkingLotApi.Dtos;
 using ParkingLotApi.Exceptions;
 using ParkingLotApi.Models;
@@ -30,9 +31,12 @@ namespace ParkingLotApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ParkingLot>>> GetAll()
+        public async Task<ActionResult<List<ParkingLot>>> GetAll([FromQuery]int pageIndex)
         {
-            return Ok(await _parkingLotsService.GetAsync());
+            List<ParkingLot> parkingLots = await _parkingLotsService.GetAsync();
+            int pageSize = 15;
+            int countToBeSkip = pageSize * (pageIndex - 1);
+            return Ok(parkingLots.Skip(countToBeSkip).Take(pageSize).ToList());
         }
 
         [HttpGet("{id}")]
