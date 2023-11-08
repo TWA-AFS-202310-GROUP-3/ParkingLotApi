@@ -51,14 +51,14 @@ namespace ParkingLotApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ParkingLot>> UpdateCapacityById(string id, [FromBody] int capacity)
+        public async Task<ActionResult<ParkingLot>> UpdateCapacityById(string id, [FromBody] CapacityDto capacity)
         {
             var parkingLot = await _parkingLotsService.GetByIdAsync(id);
             if(parkingLot == null)
             {
                 return NotFound();
             }
-            parkingLot.Capacity = capacity;
+            parkingLot.Capacity = capacity.Capacity;
             return await _parkingLotsService.UpdateParkingLotAsync(id, parkingLot);
         }
     }
