@@ -12,11 +12,10 @@ namespace ParkingLotApiTest.Controllers
 {
     public class ParkingLotsControllerTest : TestBase
     {
-        private HttpClient _httpClient;
         public ParkingLotsControllerTest(WebApplicationFactory<Program> factory) : base(factory)
-        { 
-            _httpClient = GetClient();
+        {
         }
+
         [Fact]
         public async Task Should_return_400_when_create_parking_lot_given_capacity_less_than_10()
         {
