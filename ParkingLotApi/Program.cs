@@ -1,5 +1,7 @@
 using ParkingLotApi.Exceptions;
 using ParkingLotApi.Filters;
+using ParkingLotApi.Models;
+using ParkingLotApi.Repository;
 using ParkingLotApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,9 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ParkingLotsService>();
+builder.Services.AddSingleton<IParkingLotsRepository, ParkingLotsRepository>(); //singleton bc 希望只是一份数据
+builder.Services.Configure<ParkingLotDatabaseSettings>
+    (builder.Configuration.GetSection("ParkingLotStoreDatabase")); //ParkingLotStoreDatabase is defined in appsettings.json
 
 var app = builder.Build();
 
