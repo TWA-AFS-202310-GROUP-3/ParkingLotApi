@@ -9,5 +9,6 @@ namespace ParkingLotApi.Services
         Task DeleteAsync(string parkingLotName);
         Task<List<ParkingLotDto>> GetPage(int pageSize, int pageIndex);
         Task<List<ParkingLotDto>> GetAll();
+        Task<ParkingLot> GetById(string id);
     }
 }
