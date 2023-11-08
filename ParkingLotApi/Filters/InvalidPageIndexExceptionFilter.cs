@@ -7,7 +7,7 @@ namespace ParkingLotApi.Filters
 {
     public class InvalidPageIndexExceptionFilter : IActionFilter, IOrderedFilter
     {
-        public int Order => 0;
+        public int Order => 2;
 
         public void OnActionExecuted(ActionExecutedContext context)
         {

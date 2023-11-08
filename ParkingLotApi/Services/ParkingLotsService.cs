@@ -38,9 +38,9 @@ namespace ParkingLotApi.Services
         public async Task<List<ParkingLot>> GetInPageAsync(int pageIndex)
         {
             List<ParkingLot> parkingLots = await GetAsync();
-            int pageSize = 15;
+            int pageSize = 6;
             int pagesToBeSkip = pageSize * (pageIndex - 1);
-            if ( pagesToBeSkip >= parkingLots.Count || pagesToBeSkip < 1 )
+            if ( pagesToBeSkip >= parkingLots.Count || pageIndex < 1 )
             {
                 throw new InvalidPageIndexException();
             }
