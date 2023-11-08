@@ -16,7 +16,7 @@ namespace ParkingLotApi.Services
             {
                 throw new InvalidCapacityException("The capacity should be no less than 10");
             }
-            return await _parkingLotsRepository.CreateParkingLot(parkingLotDto.ToEntity());
+            return await _parkingLotsRepository.CreateParkingLotAsync(parkingLotDto.ToEntity());
         }
     }
 }

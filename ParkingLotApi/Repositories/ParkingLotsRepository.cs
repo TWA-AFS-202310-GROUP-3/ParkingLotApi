@@ -16,7 +16,7 @@ namespace ParkingLotApi.Repositories
 
         }
 
-        public async Task<ParkingLotEntity> CreateParkingLot(ParkingLotEntity parkingLot)
+        public async Task<ParkingLotEntity> CreateParkingLotAsync(ParkingLotEntity parkingLot)
         {
             await _parkingLotsCollection.InsertOneAsync(parkingLot);
             return await _parkingLotsCollection.Find(a => a.Name == parkingLot.Name).FirstAsync();
