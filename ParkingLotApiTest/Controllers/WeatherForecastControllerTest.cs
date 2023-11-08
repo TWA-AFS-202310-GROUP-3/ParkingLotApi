@@ -10,7 +10,7 @@ namespace ParkingLotApiTest.Controllers
 {
     public class WeatherForecastControllerTest : TestBase
     {
-        private HttpClient httpClient;
+        //private HttpClient httpClient;
 
         public WeatherForecastControllerTest(WebApplicationFactory<Program> factory) : base(factory)
         {
@@ -22,7 +22,7 @@ namespace ParkingLotApiTest.Controllers
         public async Task Should_return_correctly_when_get_weather_forecast()
         {
             //given&when
-            httpClient = GetClient();
+            HttpClient httpClient = GetClient();
             HttpResponseMessage response = await httpClient.GetAsync("/WeatherForecast");
 
             //then
