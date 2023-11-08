@@ -24,6 +24,9 @@ namespace ParkingLotApi.Services
         public async Task DeleteAsync(string id) =>
             await parkingLotsRepository.DeleteParkingLot(id);
 
+        public async Task<List<ParkingLot>> GetAsync() =>
+            await parkingLotsRepository.GetAll();
+
         public async Task<ParkingLot> GetByIdAsync(string id) =>
             await parkingLotsRepository.GetParkingLotById(id);
     }
