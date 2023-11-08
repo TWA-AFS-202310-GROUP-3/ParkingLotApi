@@ -1,4 +1,4 @@
-﻿namespace ParkingLotApiTest.Dtos
+﻿namespace ParkingLotApi.Dtos
 {
     public class ParkingLotDto
     {

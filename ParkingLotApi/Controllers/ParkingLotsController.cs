@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ParkingLotApi.Dtos;
+using ParkingLotApi.Models;
 using ParkingLotApi.Services;
-using ParkingLotApiTest.Dtos;
-using ParkingLotApiTest.Models;
-using ParkingLotApi.Exceptions;
 
 namespace ParkingLotApi.Controllers
 {
