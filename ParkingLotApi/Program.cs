@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment()) //only open swagger under development enviroment
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -23,3 +23,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { } //or add StartUp.cs
