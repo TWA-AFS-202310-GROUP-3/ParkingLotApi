@@ -6,5 +6,6 @@ namespace ParkingLotApi.Repositories
     {
         Task<ParkingLotEntity> CreateParkingLotAsync(ParkingLotEntity parkingLo);
         Task<bool> DeleteParkingLotAsync(string id);
+        Task<List<ParkingLotEntity>> GetAllAsync();
     }
 }
