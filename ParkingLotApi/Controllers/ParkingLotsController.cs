@@ -2,6 +2,7 @@
 using ParkingLotApi.Services;
 using ParkingLotApiTest.Dtos;
 using ParkingLotApiTest.Models;
+using ParkingLotApi.Exceptions;
 
 namespace ParkingLotApi.Controllers
 {
@@ -24,7 +25,7 @@ namespace ParkingLotApi.Controllers
             {
                 return StatusCode(StatusCodes.Status201Created,await parkingService.AddParkingLot(parkingLotDto));
             }
-            catch (Exception ex)
+            catch (InvalidCapacityException ex)
             {
                 return BadRequest(ex.Message);
             }
