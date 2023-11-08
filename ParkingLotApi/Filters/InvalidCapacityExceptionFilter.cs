@@ -11,7 +11,7 @@ namespace ParkingLotApi.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Exception is InvalidCapacityException invalidCapacityException)
+            if (context.Exception is InvalidCapacityException || context.Exception is DuplicateNameException)
             {
                 context.Result = new BadRequestResult();
                 context.ExceptionHandled = true;

@@ -20,10 +20,14 @@ namespace ParkingLotApi.Services
             {
                 throw new InvalidCapacityException();
             }
+            ParkingLotEntity parkingLotEntity = await parkingLotRepository.CreateParkingLot(DataConverter.ConvertRequestToParkingLotEntity(parkingLotRequestDto));
 
-            ParkingLotDto parkingLotDto = DataConverter.ConvertToParkingLotDto(await parkingLotRepository.CreateParkingLot(DataConverter.ConvertRequestToParkingLotEntity(parkingLotRequestDto)));
+            if (parkingLotEntity == null)
+            {
+                throw new DuplicateNameException();
+            }
 
-            return parkingLotDto;
+            return DataConverter.ConvertToParkingLotDto(parkingLotEntity);
         }
 
         public async Task DeleteParkingLot(string id)

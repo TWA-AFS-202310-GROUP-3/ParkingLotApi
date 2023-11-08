@@ -18,8 +18,13 @@ namespace ParkingLotApi.Repositories
 
         public async Task<ParkingLotEntity> CreateParkingLot(ParkingLotEntity parkingLotEntity)
         {
+            ParkingLotEntity existed = await parkingLotCollection.Find(a => a.Name == parkingLotEntity.Name).FirstOrDefaultAsync();
+            if (existed != null)
+            {
+                return null;
+            }
             await parkingLotCollection.InsertOneAsync(parkingLotEntity);
-            return await parkingLotCollection.Find(a => a.Name == parkingLotEntity.Name).FirstOrDefaultAsync();
+            return await parkingLotCollection.Find(a => a.Name.Equals(parkingLotEntity.Name)).FirstOrDefaultAsync();
         }
 
         public async Task DeleteParkingLot(string id)
