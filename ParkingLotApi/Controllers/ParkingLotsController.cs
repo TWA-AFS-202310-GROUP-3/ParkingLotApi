@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using ParkingLotApi.Dtos;
 using ParkingLotApi.Exceptions;
+using ParkingLotApi.Models;
 using ParkingLotApi.Services;
 
 namespace ParkingLotApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")] //Ä¬ÈÏParkingLotsControllerÖÐcontrollerÇ°ÃæµÄ×Ö·ûÊÇÂ·¾¶
+    [Route("[controller]")] //Ä¬ï¿½ï¿½ParkingLotsControllerï¿½ï¿½controllerÇ°ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Â·ï¿½ï¿½
     public class ParkingLotsController : ControllerBase
     {
         private readonly ParkingLotsService _parkingLotsService;
-        public ParkingLotsController(ParkingLotsService parkingLotsService) //½«ParkingLotsService×¢Èë¹¹Ôìº¯Êý
+        public ParkingLotsController(ParkingLotsService parkingLotsService) //ï¿½ï¿½ParkingLotsService×¢ï¿½ë¹¹ï¿½ìº¯ï¿½ï¿½
         {
-            this._parkingLotsService = parkingLotsService;
+            _parkingLotsService = parkingLotsService;
         }
 
         [HttpPost]
@@ -32,6 +33,49 @@ namespace ParkingLotApi.Controllers
             //    return BadRequest();
             //}
             // return null;
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult> DeleteParkingLotAsync(string id)
+        {
+            await _parkingLotsService.DeleteAsync(id);
+            return NoContent();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<ParkingLot>>> GetOnePageAsync([FromQuery] int? pageIndex)
+        {
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+                return Ok(await _parkingLotsService.GetOnePageAsync((int)pageIndex));
+            }
+            else
+            {
+                return Ok(await _parkingLotsService.GetOnePageAsync((int)pageIndex));
+            }
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetParkingLotByIdAsync(string id)
+        {
+            var parkingLot = await _parkingLotsService.GetByIdAsync(id);
+            if (parkingLot == null)
+            {
+                return NotFound();
+            }
+            return Ok(parkingLot);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> GetParkingLotByIdAsync(string id, int capacity)
+        {
+            var updatedParkingLot = await _parkingLotsService.UpdateParkingLotCapacityAsync(capacity, id);
+            if (updatedParkingLot == null)
+            {
+                return NotFound();
+            }
+            return Ok(updatedParkingLot);
         }
     }
 }
