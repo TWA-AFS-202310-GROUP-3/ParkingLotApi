@@ -18,7 +18,7 @@ namespace ParkingLotApiTest.Controllers
         [Fact]
         public async Task Should_return_correctly_when_get_weather_forecast()
         {
-            // 测试命令： dotnet test .\ParkingLotApiTest\
+
             // Given & When
             HttpResponseMessage response = await _httpClient.GetAsync("/WeatherForecast");
             // Then
