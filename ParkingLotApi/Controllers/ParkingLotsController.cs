@@ -27,5 +27,16 @@ namespace ParkingLotApi.Controllers
                 return BadRequest(ex.Message);
             }*/
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> RemoveParkingLot(string id)
+        {
+            var isRemoved = await _parkingLotsService.RemoveAsync(id);
+            if (isRemoved) 
+            { 
+                return NoContent();
+            }
+            return NotFound();
+        }
     }
 }
