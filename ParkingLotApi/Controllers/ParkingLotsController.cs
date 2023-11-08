@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ParkingLotApi.Dtos;
 using ParkingLotApi.Exceptions;
+using ParkingLotApi.Models;
 using ParkingLotApi.Services;
 
 namespace ParkingLotApi.Controllers
@@ -33,7 +34,7 @@ namespace ParkingLotApi.Controllers
         {
             if (pageSize != null && pageIndex != null)
             {
-                return Ok(await _parkingLotsService.GetPage((int)pageSize, pageIndex));
+                return Ok(await _parkingLotsService.GetPage((int)pageSize, (int)pageIndex));
             }
             return Ok(await _parkingLotsService.GetAll());
         }
@@ -47,6 +48,17 @@ namespace ParkingLotApi.Controllers
                 return NotFound();
             }
             return Ok(parkingLot);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ParkingLot>> UpdateById(string id, [FromBody] ParkingLotDto parkingLotDto)
+        {
+            var parkingLot = await _parkingLotsService.UpdateParkingLotCapacity(id, parkingLotDto);
+            if (parkingLot == null)
+            {
+                return BadRequest();
+            }
+            return parkingLot;
         }
     }
 }

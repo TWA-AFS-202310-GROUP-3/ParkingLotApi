@@ -10,5 +10,6 @@ namespace ParkingLotApi.Services
         Task<List<ParkingLotDto>> GetPage(int pageSize, int pageIndex);
         Task<List<ParkingLotDto>> GetAll();
         Task<ParkingLot> GetById(string id);
+        Task<ParkingLot> UpdateCapacity(string id, ParkingLotDto parkingLotDto);
     }
 }
