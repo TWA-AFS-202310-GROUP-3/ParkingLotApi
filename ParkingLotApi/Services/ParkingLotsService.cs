@@ -18,8 +18,14 @@ namespace ParkingLotApi.Services
             {
                 throw new InvalidCapacityException();
             }
-            //List<ParkingLot> parkingLots = await GetAsync();
-            
+            List<ParkingLot> parkingLots = await GetAsync();
+            foreach (var item in parkingLots)
+            {
+                if ( item.Name ==  parkingLotDto.Name)
+                {
+                    throw new UsedNameException();
+                }
+            }
             return await parkingLotsRepository.CreateParkingLot(parkingLotDto.ToEntity());
         }
 
