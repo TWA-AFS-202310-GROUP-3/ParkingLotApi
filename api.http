@@ -1,0 +1,40 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@hostname=localhost
+@port=??
+
+# ParkingLot APIS
+## POST /api/ParkingLots
+## GET /api/ParkingLots
+## GET /api/ParkingLots/{name}
+## GET /api/ParkingLots?page-size={x}&index={y}
+## PUT /api/ParkingLots/{name}
+## DELETE /api/ParkingLots/{name}
+
+## 1. Create ParkingLot
+POST http://{{hostname}}:{{port}}/api/ParkingLots
+Content-Type: application/json; charset=utf-8
+
+{
+    "Name": "parkinglot one",
+    "Capacity" : 10,
+    "Location" : "Chengfu Road"
+}
+
+## Response 
+{
+    "Id": "fdjsljldbvjsal",
+    "Name": "parkinglot one",
+    "Capacity" : 10,
+    "Location" : "Chengfu Road"
+}
+### 1.Created, Return the parkinglot created with Status Created ( 201 )
+### 2.Already Existed, Return Status Bad Request ( 400 )
+### 3.Required Message Invalidation, Return Status Bad Request (400)
+
+## 2.Get All ParkingLots
+GET http://{{hostname}}:{{port}}/api/ParkingLots
+Content-Type: application/json; charset=utf-8
+
+## Response  
+### 1.Found, Return all ParkingLots found with Status OK ( 200 )
