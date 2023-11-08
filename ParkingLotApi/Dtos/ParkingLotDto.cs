@@ -1,9 +1,8 @@
-﻿namespace ParkingLotApi.Controllers
+﻿namespace ParkingLotApi.Dtos;
+
+public class ParkingLotDto
 {
-    public class ParkingLotDto
-    {
-        public string Name { get; set; } //ctrl+d自动向下复制一行
-        public int Capacity { get; set; }
-        public string Location { get; set; }
-    }
+    public string Name { get; set; } //ctrl+d自动向下复制一行
+    public int Capacity { get; set; }
+    public string Location { get; set; }
 }

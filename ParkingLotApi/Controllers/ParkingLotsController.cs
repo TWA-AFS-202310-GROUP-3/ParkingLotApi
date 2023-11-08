@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ParkingLotApi.Dtos;
+using ParkingLotApi.Services;
 
 namespace ParkingLotApi.Controllers
 {
@@ -6,8 +8,14 @@ namespace ParkingLotApi.Controllers
     [Route("[controller]")] //默认ParkingLotsController中controller前面的字符是路径
     public class ParkingLotsController : ControllerBase
     {
+        private readonly ParkingLotsService _parkingLotsService;
+        public ParkingLotsController(ParkingLotsService parkingLotsService) //将ParkingLotsService注入构造函数
+        {
+            this._parkingLotsService = parkingLotsService;
+        }
+
         [HttpPost]
-        public async Task<ActionResult<ParkingLotDto>> AddParkingLot([FromBody] ParkingLotDto parkingLotDto)
+        public async Task<ActionResult<ParkingLotDto>> AddParkingLotAsync([FromBody] ParkingLotDto parkingLotDto)
         {
             if (parkingLotDto.Capacity < 10)
             {
