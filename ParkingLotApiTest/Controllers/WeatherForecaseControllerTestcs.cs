@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace ParkingLotApiTest.Controllers
 {
-    public class WeatherForecaseControllerTestcs
+    public class WeatherForecaseControllerTestcs : TestBase
     {
         private HttpClient _httpClient;
-        public WeatherForecaseControllerTestcs()
+        public WeatherForecaseControllerTestcs(WebApplicationFactory<Program> factory) : base(factory)
         {
             WebApplicationFactory<Program> webApplicationFactory = new WebApplicationFactory<Program>();
-            _httpClient = webApplicationFactory.CreateClient();
+            _httpClient = GetClient();
 
         }
 
