@@ -9,5 +9,6 @@ namespace ParkingLotApi.Repositories
         public Task DeleteParkingLotById(string id);
         public Task<List<ParkingLot>> GetParkingLotByPageInfo(int pageIndex, int pageSize);
         public Task<List<ParkingLot>> GetAllParkingLot();
+        public Task<ParkingLot> UpdateParkingLotInfo(string id, ParkingLot parkingLot);
     }
 }

@@ -63,5 +63,20 @@ namespace ParkingLotApi.Services
 
             return parkingLot;
         }
+
+        public async Task<ParkingLot> UpdateParkingLot(string id, ParkingLotDto parkingLotDto)
+        {
+            ParkingLot parkingLot = await parkingLotsRepository.GetParkingLotById(id);
+            
+            if (parkingLot == null)
+            {
+                throw new ParkingLotNotFoundException();
+            }
+
+            parkingLot.Location = parkingLotDto.Location;
+            parkingLot.Capacity = (int)parkingLotDto.Capacity;
+
+            return await parkingLotsRepository.UpdateParkingLotInfo(id, parkingLot);
+        }
     }
 }
