@@ -16,10 +16,30 @@ namespace ParkingLotApi.Repositories
         }
 
 
-        public async Task<ParkingLotEntity> createParkingLot(ParkingLotEntity parkingLotEntity)
+        public async Task<ParkingLotEntity> CreateParkingLot(ParkingLotEntity parkingLotEntity)
         {
             await parkingLotCollection.InsertOneAsync(parkingLotEntity);
             return await parkingLotCollection.Find(a => a.Name == parkingLotEntity.Name).FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteParkingLot(string id)
+        {
+            await parkingLotCollection.FindOneAndDeleteAsync(a => a.Id == id);
+        }
+
+        public Task<ParkingLotEntity> GetParkingLot(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<ParkingLotEntity>> GetParkingLots()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ParkingLotEntity> UpdateParkingLot(ParkingLotEntity parkingLotEntity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

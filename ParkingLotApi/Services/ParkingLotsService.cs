@@ -4,7 +4,6 @@ using ParkingLotApi.Dtos;
 using ParkingLotApi.Models;
 using ParkingLotApi.Utils;
 
-
 namespace ParkingLotApi.Services
 {
     public class ParkingLotsService
@@ -15,13 +14,21 @@ namespace ParkingLotApi.Services
             this.parkingLotRepository = parkingLotRepository;
         }
 
-        public async Task<ParkingLotEntity> AddParkingLot(ParkingLotDto parkingLotDto)
+        public async Task<ParkingLotDto> AddParkingLot(ParkingLotRequestDto parkingLotRequestDto)
         {
-            if (parkingLotDto.Capacity < 10)
+            if (parkingLotRequestDto.Capacity < 10)
             {
                 throw new InvalidCapacityException();
             }
-            return await parkingLotRepository.createParkingLot(DataConverter.ConvertToParkingLotEntity(parkingLotDto));
+
+            ParkingLotDto parkingLotDto = DataConverter.ConvertToParkingLotDto(await parkingLotRepository.CreateParkingLot(DataConverter.ConvertRequestToParkingLotEntity(parkingLotRequestDto)));
+
+            return parkingLotDto;
+        }
+
+        public async Task DeleteParkingLot(string id)
+        {
+            await parkingLotRepository.DeleteParkingLot(id);
         }
     }
 }
